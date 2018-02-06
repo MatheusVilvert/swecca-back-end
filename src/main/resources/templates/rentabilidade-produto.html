@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Produtos e Rentabilidade</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1>Produtos e Rentabilidade</h1>
+<table class="table table-sm table-striped table-hover table-bordered">
+    <thead>
+    <tr>
+        <th>Descrição<br/>Tipo do Produto</th>
+        <th>R$ Custo</th>
+        <th>R$ Vda</th>
+        <th>Margem</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="produto : ${produtos}">
+        <td th:utext="${produto.produto.descricao+'&lt;br /&gt;'+produto.produto.tipoProduto.descricao}"></td>
+        <td th:utext="${produto.produto.precoCusto}"></td>
+        <td th:utext="${produto.produto.precoVenda}"></td>
+        <td th:utext="${produto.margemProduto}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

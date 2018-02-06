@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Posição de Estoque</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1>Posição de Estoque</h1>
+<table class="table table-sm table-striped table-hover table-bordered">
+    <thead>
+    <tr>
+        <th>Descricao<br/>Tipo do Produto</th>
+        <th>Estoque Disp<br/>Estoque Min</th>
+        <th>R$ Custo<br/>R$ Vda</th>
+        <th>R$ Min Vda</th>
+        <th>R$ Máx Vda</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="produto : ${produtos}">
+        <td th:utext="${produto.descricao+'&lt;br /&gt;'+produto.tipoProduto.descricao}"></td>
+        <td th:utext="${produto.qtdEstoque+'&lt;br /&gt;'+produto.qtdMinEstoque}"></td>
+        <td th:utext="${produto.precoCusto+'&lt;br /&gt;'+produto.precoVenda}"></td>
+        <td th:utext="${produto.precoMinVenda}"></td>
+        <td th:utext="${produto.precoMaxVenda}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
