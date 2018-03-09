@@ -20,8 +20,12 @@ public class Fornecedor {
     private String contato;
     private String info;
     private String email;
+    private boolean transportador;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn
+    private PlanoDeContas planoDeContas;
 
-    public Fornecedor(String nome, Endereco endereco, String cpfCnpj, String rgIe, String telefone, String contato, String info, String email) {
+    public Fornecedor(String nome, Endereco endereco, String cpfCnpj, String rgIe, String telefone, String contato, String info, String email,boolean transportador,PlanoDeContas planoDeContas) {
         this.nome = nome;
         this.endereco = endereco;
         this.cpfCnpj = cpfCnpj;
@@ -30,6 +34,8 @@ public class Fornecedor {
         this.contato = contato;
         this.info = info;
         this.email = email;
+        this.transportador = transportador;
+        this.planoDeContas = planoDeContas;
     }
 
     public Fornecedor() {

@@ -1,6 +1,7 @@
 package com.marari.swecca.service;
 
 
+import com.marari.swecca.model.Caixa;
 import com.marari.swecca.model.Pedido;
 import com.marari.swecca.model.Produto;
 import com.marari.swecca.repository.*;
@@ -20,6 +21,8 @@ public class PedidoService {
     @Autowired
     private ProdutoRepository produtoRepository;
     @Autowired
+    private CaixaRepository caixaRepository;
+    @Autowired
     ClienteRepository clienteRepository;
     @Autowired
     UsuarioRepository usuarioRepository;
@@ -29,6 +32,7 @@ public class PedidoService {
     ItemPedidoRepository itemPedidoRepository;
 
     public Pedido salvar(Pedido pedido){
+        Caixa caixa = new Caixa();
         double tot = 0;
         DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
@@ -51,13 +55,31 @@ public class PedidoService {
         pedido.setValorTotal(tot);
         pedidoRepository.save(pedido);
 
+        caixa.setData(pedido.getData());
+        caixa.setDescricao(pedido.getInfo());
+        caixa.setValor(pedido.getValorTotal());
+        caixa.setCliente(pedido.getCliente());
+        caixa.setFormaPagamento(pedido.getFormaPagamento());
+        
+        caixaRepository.save(caixa);
+
 
         return pedido;
     }
 
     public List<Pedido> buscarTodos(){return pedidoRepository.findAll();}
 
-    public void excluir(Pedido pedido){pedidoRepository.delete(pedido);}
+    public void excluir(Pedido pedido){
+        Pedido pedidoDelete = pedidoRepository.findOne(pedido.getId());
+        for (int i =0; i<pedidoDelete.getItensPedido().size(); i++){
+            Produto produto = new Produto();
+            produto = produtoRepository.findOne(pedidoDelete.getItensPedido().get(i).getProduto().getId());
+            produto.setQtdEstoque(produto.getQtdEstoque() + pedidoDelete.getItensPedido().get(i).getQuantidade());
+            produtoRepository.save(produto);
+
+        }
+        pedidoRepository.delete(pedido);
+    }
 
     public double vendasHoje(){
         DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");

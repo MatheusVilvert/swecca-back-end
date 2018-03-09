@@ -19,4 +19,5 @@ public interface CaixaRepository extends JpaRepository<Caixa,Integer> {
 
     @Query("select c from Caixa c where c.data between :dataIni and :dataFin")
     List<Caixa> movimentoCaixa(@Param("dataIni") String dataIni, @Param("dataFin") String dataFin);
+
 }

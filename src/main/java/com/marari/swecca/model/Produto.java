@@ -34,8 +34,9 @@ public class Produto {
     @JoinColumn
     private Usuario usuario;
     private String validade;
+    private String referencia;
 
-    public Produto(String descricao, String codBarras, Fornecedor fornecedor, Double precoCusto, Double precoVenda, Double precoMinVenda, Double precoMaxVenda, Double comissaoVenda, Integer qtdEstoque, Integer qtdMinEstoque, Double altura, Double peso, Double largura, Double profundidade, String medidaProduto, TipoProduto tipoProduto, Usuario usuario, String validade) {
+    public Produto(String descricao, String codBarras, Fornecedor fornecedor, Double precoCusto, Double precoVenda, Double precoMinVenda, Double precoMaxVenda, Double comissaoVenda, Integer qtdEstoque, Integer qtdMinEstoque, Double altura, Double peso, Double largura, Double profundidade, String medidaProduto, TipoProduto tipoProduto, Usuario usuario, String validade,String referencia) {
         this.descricao = descricao;
         this.codBarras = codBarras;
         this.fornecedor = fornecedor;
@@ -54,6 +55,7 @@ public class Produto {
         this.tipoProduto = tipoProduto;
         this.usuario = usuario;
         this.validade = validade;
+        this.referencia = referencia;
     }
 
     public Produto() {
