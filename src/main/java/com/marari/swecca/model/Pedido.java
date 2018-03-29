@@ -12,15 +12,19 @@ public class Pedido {
     @GeneratedValue
     private Integer id;
     @OneToMany(cascade = {CascadeType.PERSIST})
+    @JoinColumn
     private List<ItemPedido> itensPedido;
     private Double valorTotal;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn
     private Usuario usuario;
     private String info;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn
     private Cliente cliente;
     private String data;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn
     private FormaPagamento formaPagamento;
 
     public Pedido(List<ItemPedido> itensPedido, Double valorTotal, Usuario usuario, String info, Cliente cliente, String data, FormaPagamento formaPagamento) {
